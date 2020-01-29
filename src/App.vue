@@ -1,8 +1,6 @@
 <template lang="pug">
   div.container
-    form.form-group
-      radio(v-for="(item, index) in List" :key="index" :type="item.type" :title="item.title" :answers="item.answers")
-      button.btn.btn-primary(type="submit") Send
+    radio(v-for="(item, index) in List" :key="index" :type="item.type" :title="item.title" :answers="item.answers")
     table.table
       tr
         td
@@ -11,6 +9,7 @@
 <script>
 import Radio from "./components/Radio";
 export default {
+  count: 0,
   components: { Radio },
   data() {
     return {
@@ -27,7 +26,7 @@ export default {
         },
         {
           type: "checkbox",
-          title: "Какой из этих тегов строчные?",
+          title: "Какие из этих тегов строчные?",
           answers: [
             'a', 
             'div', 
@@ -37,9 +36,6 @@ export default {
         }
       ],
     }  
-  },
-  mounted() {
-    console.log(this.radioList);
   }
 }
 </script>
