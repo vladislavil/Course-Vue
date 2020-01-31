@@ -26,7 +26,9 @@ export default {
   //   }
   // }
 
-  computed: mapGetters(['cnt', 'total']) //короткая форма обращения к store
+  computed: { 
+    ...mapGetters(['cnt', 'total']) //короткая форма обращения к store
+  }
 }
 
 </script>
