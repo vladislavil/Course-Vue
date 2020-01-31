@@ -1,29 +1,18 @@
 <template lang="pug">
   div
-    header
-      .container
-        .row
-          .col.col-sm-12
-            h1 Site
-            app-cart(:cnt="cnt" )
-    section
-      .container
-        .row
-          .col.col-sm-12
-            app-product(
-              @minus="onMinus"
-              @plus="onPlus"
-            )
+    my-header( :cnt="cnt")
+    my-content( @minus="onMinus"
+                @plus="onPlus")
 
 </template>
 
 <script>
 
-import AppProduct from "./components/AppProduct";
-import AppCart from "./components/AppCart"
+import MyContent from "./components/Content";
+import MyHeader from "./components/Header"
 
 export default {
-  components: { AppCart, AppProduct },
+  components: { MyContent, MyHeader },
   data() {
     return {
         cnt: 0,
