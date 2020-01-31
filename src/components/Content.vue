@@ -3,10 +3,7 @@
     .container
       .row
         .col.col-sm-12
-          app-product(
-            @minus="$emit('minus', $event)"
-            @plus="$emit('plus', $event)"
-          )
+          app-product
 </template>
 
 <script>
@@ -15,12 +12,6 @@ import AppProduct from "./AppProduct"
 
 export default {
   components: { AppProduct },
-  props: ['cnt'],
-  data() {
-    return {
-
-    }
-  }
 }
 
 </script>

@@ -4,7 +4,7 @@
       .row
         .col.col-sm-12
           h1 Site
-          app-cart( :cnt="cnt" )
+          app-cart
 </template>
 
 <script>

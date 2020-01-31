@@ -1,7 +1,7 @@
 <template lang="pug">
     div
         h2 Product title
-        .price 1000
+        .price Price: {{ price }}
         hr 
         button.btn.btn-warning( @click="onMinus") -1
         button.btn.btn-success( @click="onPlus")  +1
@@ -17,11 +17,16 @@ export default {
     }
   }, 
   methods: {
-      onMinus() {
-        this.$emit('minus')
-      },
-      onPlus() {
-        this.$emit('plus')
+    onMinus() {
+      this.$store.commit('minus');
+    },
+    onPlus() {
+      this.$store.commit('plus');
+    }
+  },
+  computed: {
+      price() {
+          return this.$store.getters.price
       }
   }
 }
