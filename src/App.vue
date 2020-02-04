@@ -1,88 +1,92 @@
 <template lang="pug">
   div
-    my-header(:name="name" v-if="formSubmited")
-    form.form-group(action='', @submit.prevent='formSubmited = true', v-if='!formSubmited')
-      div.progress
-        div.progress-bar(role='progressbar', :style="'width:'+ styleWidth", :aria-valuenow="styleWidth", aria-valuemin='0', aria-valuemax='100')
-      my-input(v-for="(item, index) in info" :key='index' :name='item.name' :value='item.value' :pattern='item.pattern' @inp="onInput(index, $event)")
-      button.btn.btn-primary(type='submit' :disabled="done < info.length") Submit
-    table.table(v-if='formSubmited')
-      tr(v-for="(item, index) in info" :key="index")
-        td {{ item.name }}
-        td {{ item.value }}
+    header
+      .container
+        .row
+          .col.col-sm-9
+            h1 Site 
+          .col.col-sm-3
+            .alert.alert-default
+              div In Cart: 
+        hr
+    section
+      .container
+        .row
+          .col.col-sm-3.menu
+            ul.list-group 
+            router-link(v-for="(item, index) in menuList" :key="index" :to="item.url" tag="li" class="list-group-item" active-class="active")
+              a {{item.text}}
+          .col.col-sm-9
+            router-view
 </template>
 
 <script>
 
-import MyInput from './components/MyInput';
-import myHeader from "./components/Header"
-import { mapGetters } from "vuex";
-import { mapMutations } from "vuex";
+import {mapGetters} from 'vuex';
 
 export default {
-  components: { MyInput, myHeader },
   data() {
     return {
-      done: 0,
-      formSubmited: false,
-      validStatus: []
+
     }
   },
   computed: {
-      ...mapGetters(['info','name']),
-      styleWidth() {
-        return this.done * 100 / this.info.length + '%'
-      }
-  },
-  created() {
-    for(let i = 0; i < this.info.lenth; i++) {
-        this.validStatus[i].push(false);
-    }
-  },
-  methods: {
-    onInput(index, data) {
-      this.validStatus[index] = data.valid;
-      this.$store.commit('Info', {
-          ind: index,
-          dt: data.val
-      });
 
-      let done = 0;
+    ...mapGetters('menu', {
+        menuList: 'items'
+    })
 
-      console.log(this.validStatus)
-      for(let i = 0; i < this.info.length; i++) {
-        if(this.validStatus[i]) {
-          done++;
-        }
-      }
-
-      console.log(done)
-
-      this.done = done;
-    }
+    // items() { 
+    //   return this.$store.getters['menu/items']
+    // }
   }
 }
 
 </script>
 
-<style>
-  .fa {
-    font-family: "Solid";
-  }
-  .fa-exclamation-circle {
-    color: red;
-  }
-  .fa-check-circle {
-    color: green;
-  }
-  input, label, form {
-    display: block;
-  }
-  input {
-    width: 100%;
-  }
-  form {
-    max-width: 400px;
-    margin: 0 auto;
-  }
+<style lang="sass">
+a
+  display: block
+  width: 100%
+  height: 100%
+  padding: .75rem 1.25rem
+
+.menu
+  border-right: 1px solid #ddd
+
+.list-group-item
+  transition: background 0.3s, color 0.3s
+  padding: 0
+
+.list-group-item a
+  text-decoration: none 
+
+.list-group-item.active a 
+  color: inherit
+
+.slide-enter
+
+.slide-enter-active 
+  animation: slideIn 0.5s
+
+.slide-enter-to
+
+.slide-live 
+
+.slide-live-active 
+  animation: slideOut 0.5s
+
+@keyframes slideIn
+  from
+    transform: rotateY(90deg)
+  to
+    transform: rotateY(0deg)
+
+@keyframes slideOut
+  from
+    transform: rotateY(0deg)
+  to
+    transform: rotateY(90deg)
+
+
 </style>
