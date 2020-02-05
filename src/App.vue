@@ -7,7 +7,7 @@
             h1 Site 
           .col.col-sm-3
             .alert.alert-default
-              div In Cart: 
+              div In Cart: {{ cartCount }}
         hr
     section
       .container
@@ -17,7 +17,8 @@
             router-link(v-for="(item, index) in menuList" :key="index" :to="item.url" tag="li" class="list-group-item" active-class="active")
               a {{item.text}}
           .col.col-sm-9
-            router-view
+            transition(name="slide" mode="out-in")
+              router-view
 </template>
 
 <script>
@@ -34,8 +35,11 @@ export default {
 
     ...mapGetters('menu', {
         menuList: 'items'
-    })
+    }),
 
+    ...mapGetters('cart', {
+        cartCount: 'cnt'
+    }),
     // items() { 
     //   return this.$store.getters['menu/items']
     // }
@@ -44,7 +48,7 @@ export default {
 
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
 a
   display: block
   width: 100%

@@ -3,8 +3,8 @@
         h1 Products
         .row
             .col.col-sm-4( v-for="product in products" )
-                h3 
-                    |  {{ product.title }}
+                router-link( :to="'/products/' + product.id_product" tag="h3") 
+                    a {{ product.title }}
                 div 
                     | {{ product.price }}
                 button.btn.btn-primary( v-if="inCart.indexOf(product.id_product) === -1" @click="addToCart(product.id_product)" ) Add to cart

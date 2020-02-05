@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 import ProductList from './components/ProductList';
+import Product from './components/Product';
 import Cart from './components/Cart';
 import E404 from './components/E404';
 import Checkout from './components/Checkout';
@@ -19,6 +20,10 @@ const routes = [
         name: 'products',
         path: '/products',
         component: ProductList
+    },
+    {
+        path: '/products/:id',
+        component: Product
     },
     {
         path: '/cart',

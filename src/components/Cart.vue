@@ -3,13 +3,17 @@
         h1 Cart
         hr
         div.alert.alert-warning(v-if="empty") You cart is empty
-        table.table(v-else) 
-            tr
-                td Товар
-                td Цена
-            tr(v-for="(product, index) in products" :key="index")
-                td {{ product.title }}
-                td {{ product.price }}
+        template(v-else)
+            table.table.table-bordered.table-hover
+                thead
+                    tr
+                        th Товар
+                        th Цена
+                tbody
+                    tr(v-for="(product, index) in products" :key="index")
+                        td {{ product.title }}
+                        td {{ product.price }}
+            button.btn.btn-success( @click="onOrder") Order now
 </template>
 
 <script>
@@ -33,5 +37,10 @@ import {mapGetters} from "vuex";
                 return this.products.length === 0
             }
         },
+        methods: {
+            onOrder() {
+                this.$router.push('/checkout')
+            }
+        }
     }
 </script>
